@@ -82,7 +82,7 @@ $push  = [$queue,$job,$msg];
 Redis::lPush('queue',json_encode($push));
 ```
 
-![image]https://github.com/ctfang/images/blob/master/queue/20191103225258.png)
+![image](https://github.com/ctfang/images/blob/master/queue/QQ%E5%9B%BE%E7%89%8720191103225258.png)
 
 ## LICENSE
 
