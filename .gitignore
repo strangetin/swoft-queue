@@ -4,12 +4,10 @@
 *.patch
 .idea/
 .git/
-.github/
 runtime/
 vendor/
+temp/
 *.lock
 .phpintel/
 .env
-.phpstorm.meta.php
 .DS_Store
-public/devtool/

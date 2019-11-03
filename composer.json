@@ -1,52 +1,27 @@
 {
-  "name": "swoft/swoft",
-  "type": "project",
-  "keywords": [
-    "php",
-    "swoole",
-    "swoft"
-  ],
-  "description": "Modern High performance AOP and Coroutine PHP Framework",
-  "license": "Apache-2.0",
-  "require": {
-    "php": ">7.1",
-    "ext-pdo": "*",
-    "ext-redis": "*",
-    "ext-json": "*",
-    "ext-mbstring": "*",
-    "swoft/framework": "~2.0.0",
-    "swoft/process": "^2.0",
-    "swoft/redis": "~2.0.0"
-  },
-  "require-dev": {
-    "swoft/swoole-ide-helper": "dev-master"
-  },
-  "autoload": {
-    "psr-4": {
-      "App\\": "app/",
-      "Swoft\\Queue\\": "swoft-queue/src/"
-    },
-    "files": [
-      "app/Helper/Functions.php"
-    ]
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "AppTest\\Testing\\": "test/testing",
-      "AppTest\\Unit\\": "test/unit"
-    }
-  },
-  "scripts": {
-    "post-root-package-install": [
-      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    "name": "ctfang/swoft-queue",
+    "type": "library",
+    "keywords": [
+        "php",
+        "swoole",
+        "swoft",
+        "queue"
     ],
-    "test": "./vendor/bin/phpunit -c phpunit.xml",
-    "cs-fix": "./vendor/bin/php-cs-fixer fix $1"
-  },
-  "repositories": {
-    "packagist": {
-      "type": "composer",
-      "url": "https://mirrors.aliyun.com/composer/"
+    "description": "Queue Component for Swoft",
+    "license": "Apache-2.0",
+    "require": {
+        "swoft/framework": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Swoft\\Queue\\": "src/"
+        }
+    },
+    "require-dev": {
+        "swoft/swoole-ide-helper": "dev-master",
+        "phpunit/phpunit": "^7.5"
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit -c phpunit.xml"
     }
-  }
 }
