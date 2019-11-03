@@ -2,6 +2,10 @@
 
 基于redis的队列组件
 
+
+## 数据流程
+![image](https://github.com/ctfang/images/blob/master/queue/QQ%E5%9B%BE%E7%89%8720191103225258.png)
+
 ## Install
 
 - composer command
@@ -81,8 +85,6 @@ $push  = [$queue,$job,$msg];
 // 'queue' 是配置对应的 redis_key 值 
 Redis::lPush('queue',json_encode($push));
 ```
-
-![image](https://github.com/ctfang/images/blob/master/queue/QQ%E5%9B%BE%E7%89%8720191103225258.png)
 
 ## LICENSE
 
