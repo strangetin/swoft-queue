@@ -1,0 +1,27 @@
+{
+    "name": "ctfang/swoft-queue",
+    "type": "library",
+    "keywords": [
+        "php",
+        "swoole",
+        "swoft",
+        "queue"
+    ],
+    "description": "Queue Component for Swoft",
+    "license": "Apache-2.0",
+    "require": {
+        "swoft/framework": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Swoft\\Queue\\": "src/"
+        }
+    },
+    "require-dev": {
+        "swoft/swoole-ide-helper": "dev-master",
+        "phpunit/phpunit": "^7.5"
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit -c phpunit.xml"
+    }
+}
