@@ -1,19 +1,8 @@
-# Swoft Process
+# 队列服务
 
-基于redis的队列组件
+## 启动队列
 
-## Install
+php bin/swoft queue:start
 
-- composer command
-
-```bash
-composer require ctfang/swoft-queue
-```
-
-## Resources
-
-
-
-## LICENSE
-
-The Component is open-sourced software licensed under the [Apache license](LICENSE).
+#### 推送任务
+php bin/swoft test:run
