@@ -4,15 +4,14 @@
 namespace Swoft\Queue\Manager;
 
 
+use chan;
 use Swoft\Bean\Annotation\Mapping\Bean;
 use Swoft\Bean\BeanFactory;
-use Swoft\Log\Helper\CLog;
 use Swoft\Queue\Annotation\Mapping\Job;
 use Swoft\Queue\Exception\ProcessException;
 use Swoft\Queue\QueueAbstract;
 use Swoft\Queue\QueuePool;
 use Swoft\Stdlib\Helper\PhpHelper;
-use Swoole\Coroutine;
 
 /**
  * Class JobsManager

@@ -3,6 +3,7 @@
 
 namespace Swoft\Queue;
 
+use chan;
 use Swoole\Process\Pool;
 
 /**
@@ -45,6 +46,17 @@ abstract class QueueAbstract
     protected $pool;
 
     /**
+     * Job协程计数器
+     *
+     * @var int
+     */
+    private $count = 0;
+    /**
+     * @var chan
+     */
+    private $chan;
+
+    /**
      * @return int
      */
     public function getQueueKey(): int
@@ -53,7 +65,7 @@ abstract class QueueAbstract
     }
 
     /**
-     * @param  int  $key
+     * @param int $key
      */
     public function setQueueKey(int $key)
     {
@@ -80,7 +92,7 @@ abstract class QueueAbstract
     }
 
     /**
-     * @param  int  $workerId
+     * @param int $workerId
      */
     protected function setWorkerId(int $workerId)
     {
@@ -96,11 +108,13 @@ abstract class QueueAbstract
     }
 
     /**
-     * @param  Pool  $pool
-     * @param  int  $workerId
+     * @param Pool $pool
+     * @param int $workerId
      */
     public function run(Pool $pool, int $workerId): void
     {
+        $this->chan = new chan;
+
         $this->setWorkerId($workerId);
         $this->setPool($pool);
 
@@ -124,10 +138,26 @@ abstract class QueueAbstract
      */
     private function toHandle($process): void
     {
-        while (true) {
+        $this->count++;
+        while (QueuePool::$running) {
             $msg = $process->pop();
             $this->handle($msg);
         }
+        // 退出一个计数
+        $this->chan->push(true);
+    }
+
+    /**
+     * 等待所有Job退出后才返回
+     *
+     * @return bool
+     */
+    public function wait(): bool
+    {
+        while ($this->count--) {
+            $this->chan->pop();
+        }
+        return true;
     }
 
     /**

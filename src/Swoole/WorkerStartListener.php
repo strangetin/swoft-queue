@@ -10,6 +10,7 @@ use Swoft\Queue\Contract\WorkerStartInterface;
 use Swoft\Queue\ProcessEvent;
 use Swoft\Queue\Manager\QueueManager;
 use Swoft\Queue\QueuePool;
+use Swoft\Queue\SwooleEvent;
 use Swoole\Process\Pool;
 use Swoft\Bean\Annotation\Mapping\Inject;
 
@@ -45,6 +46,7 @@ class WorkerStartListener implements WorkerStartInterface
      */
     public function onWorkerStart(Pool $pool, int $workerId): void
     {
+        $this->setSignal($pool,$workerId);
         // Init
         QueuePool::$processPool->initProcessPool($pool);
 
@@ -59,5 +61,26 @@ class WorkerStartListener implements WorkerStartInterface
 
         // After
         Swoft::trigger(ProcessEvent::BEFORE_PROCESS, $this, $pool, $workerId);
+    }
+
+
+    /**
+     * 设置信号
+     *
+     * @param Pool $pool
+     * @param int $workerId
+     */
+    private function setSignal(Pool $pool, int $workerId)
+    {
+        Swoft\Log\Helper\CLog::info($workerId." 监听信号");
+        \Swoole\Process::signal(SIGINT, function () use ($pool, $workerId) {
+            Swoft::trigger(SwooleEvent::WORKER_STOP, null, $pool, $workerId);
+            $pool->getProcess($workerId)->exit(1);
+        });
+
+        \Swoole\Process::signal(SIGTERM, function () use ($pool, $workerId) {
+            Swoft::trigger(SwooleEvent::WORKER_STOP, null, $pool, $workerId);
+            $pool->getProcess($workerId)->exit(1);
+        });
     }
 }

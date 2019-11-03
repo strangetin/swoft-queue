@@ -67,7 +67,7 @@ class AgentManager
         $queueManagerProcess->useQueue($queueKey, 2);
 
         $redis = Redis::connection();
-        while (true) {
+        while (QueuePool::$running) {
             $arr = $queueManagerProcess->statQueue();
             $queueNum = $arr['queue_num'];
 

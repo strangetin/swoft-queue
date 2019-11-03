@@ -3,11 +3,13 @@
 
 namespace Swoft\Queue\Manager;
 
+use Swoft;
 use Swoft\Bean\Annotation\Mapping\Bean;
 use Swoft\Bean\BeanFactory;
 use Swoft\Log\Error;
 use Swoft\Queue\QueueAbstract;
 use Swoft\Queue\QueuePool;
+use Swoft\Queue\SwooleEvent;
 use Swoft\Stdlib\Helper\PhpHelper;
 use Swoole\Process\Pool;
 

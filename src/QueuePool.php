@@ -3,6 +3,7 @@
 
 namespace Swoft\Queue;
 
+use Swoft;
 use Swoft\Bean\Annotation\Mapping\Bean;
 use Swoft\Co;
 use Swoft\Exception\SwoftException;
@@ -30,6 +31,13 @@ class QueuePool
      * @var QueuePool
      */
     public static $processPool;
+
+    /**
+     * 运行标志
+     *
+     * @var bool
+     */
+    public static $running = true;
 
     /**
      * @var Pool
