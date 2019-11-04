@@ -35,8 +35,6 @@ class AgentManager
      */
     public function run(Pool $pool, int $workerId): void
     {
-        ini_set('default_socket_timeout', -1);
-
         $queueKeyBindQueueName = QueuePool::$processPool->queueKeyBindQueueName;
         $lastArr = array_pop($queueKeyBindQueueName);
 
@@ -67,6 +65,7 @@ class AgentManager
         $queueManagerProcess->useQueue($queueKey, 2);
 
         $redis = Redis::connection();
+        ini_set('default_socket_timeout', -1);
         while (QueuePool::$running) {
             $arr = $queueManagerProcess->statQueue();
             $queueNum = $arr['queue_num'];

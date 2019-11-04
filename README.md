@@ -65,12 +65,10 @@ class TestJob extends JobAbstract
         $id = uniqid();
 
         CLog::info($id." 启动 ".json_encode($msg));
-        Log::error($id." 启动 ");
 
         Coroutine::sleep(5);
 
-        Log::error($id." 结束 ");
-        CLog::info($id." 结束 ".json_encode($msg));
+        CLog::info($id." 结束 ");
     }
 }
 ```

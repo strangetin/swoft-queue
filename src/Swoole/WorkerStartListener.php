@@ -72,7 +72,6 @@ class WorkerStartListener implements WorkerStartInterface
      */
     private function setSignal(Pool $pool, int $workerId)
     {
-        Swoft\Log\Helper\CLog::info($workerId." 监听信号");
         \Swoole\Process::signal(SIGINT, function () use ($pool, $workerId) {
             Swoft::trigger(SwooleEvent::WORKER_STOP, null, $pool, $workerId);
             $pool->getProcess($workerId)->exit(1);
