@@ -82,7 +82,7 @@ class QueueCommand extends BaseServerCommand
     public function reload(): void
     {
         $server = $this->createServer();
-        $script = input()->getScript();
+        $script = input()->getScriptName();
 
         // Check if it has started
         if (!$server->isRunning()) {
