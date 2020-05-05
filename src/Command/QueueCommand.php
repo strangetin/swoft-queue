@@ -122,7 +122,7 @@ class QueueCommand extends BaseServerCommand
      */
     private function createServer(): QueuePool
     {
-        $script  = input()->getScript();
+        $script  = input()->getScriptName();
         $command = $this->getFullCommand();
 
         /** @var QueuePool $processPool */
